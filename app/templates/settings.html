@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Settings — Employee Leave Management{% endblock %}
+
+{% block content %}
+<div class="page-title">Settings</div>
+<div class="page-subtitle">Manage your account preferences</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-box">
+            <h5>Profile Information</h5>
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" value="{{ current_user.full_name }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" value="{{ current_user.username }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" value="{{ current_user.email }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Department</label>
+                <input type="text" class="form-control" value="{{ current_user.department }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <input type="text" class="form-control" value="{{ current_user.role|capitalize }}" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card-box">
+            <h5>About This Project</h5>
+            <p class="text-muted small">
+                This Employee Leave Management System is a full-stack web application built with
+                <strong>Python (Flask)</strong> and <strong>MySQL</strong>.
+            </p>
+            <p class="text-muted small">
+                Want to learn how to build projects like this?
+            </p>
+            <div class="d-grid gap-2">
+                <a href="https://uncodemy.com/course/full-stack-development-training-course-in-noida" target="_blank" rel="noopener" class="btn btn-primary-custom">
+                    Full Stack Development Course — Noida
+                </a>
+                <a href="https://uncodemy.com/course/full-stack-development-training-course-in-delhi" target="_blank" rel="noopener" class="btn btn-outline-secondary">
+                    Full Stack Development Course — Delhi
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Login — Employee Leave Management{% endblock %}
+
+{% block auth_content %}
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="logo">
+            <i class="bi bi-calendar2-check"></i>
+            <h4 class="mt-2 fw-bold">Employee Leave Management</h4>
+            <p class="text-muted small">Login to your account</p>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show py-2" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                {{ form.username(class="form-control", placeholder="Enter username") }}
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+                {{ form.password(class="form-control", placeholder="Enter password") }}
+            </div>
+            <button type="submit" class="btn btn-primary-custom">Login</button>
+        </form>
+        <p class="text-center mt-3 mb-0 small">
+            Don't have an account? <a href="{{ url_for('main.register') }}" style="color:var(--primary);">Register</a>
+        </p>
+        <div class="text-center mt-3 small text-muted">
+            Demo: <strong>ishaan</strong> / <strong>password123</strong>
+        </div>
+        <div class="footer-links mt-3">
+            <a href="https://uncodemy.com/course/full-stack-development-training-course-in-noida" target="_blank">Full Stack Course - Noida</a>
+            ·
+            <a href="https://uncodemy.com/course/full-stack-development-training-course-in-delhi" target="_blank">Delhi</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

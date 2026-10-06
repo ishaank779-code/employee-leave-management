@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}My Leave Requests — Employee Leave Management{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <div class="page-title">My Leave Requests</div>
+        <div class="page-subtitle mb-0">View and track all your leave applications</div>
+    </div>
+</div>
+
+<div class="card-box">
+    <div class="mb-3">
+        <a href="{{ url_for('main.my_requests') }}" class="btn btn-sm {% if not status_filter %}btn-primary{% else %}btn-outline-secondary{% endif %}">All</a>
+        <a href="{{ url_for('main.my_requests', status='Pending') }}" class="btn btn-sm {% if status_filter=='Pending' %}btn-warning{% else %}btn-outline-secondary{% endif %}">Pending</a>
+        <a href="{{ url_for('main.my_requests', status='Approved') }}" class="btn btn-sm {% if status_filter=='Approved' %}btn-success{% else %}btn-outline-secondary{% endif %}">Approved</a>
+        <a href="{{ url_for('main.my_requests', status='Rejected') }}" class="btn btn-sm {% if status_filter=='Rejected' %}btn-danger{% else %}btn-outline-secondary{% endif %}">Rejected</a>
+    </div>
+
+    {% if requests %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Applied On</th>
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Days</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ req.applied_on.strftime('%d %b %Y') }}</td>
+                    <td>{{ req.leave_type.name }}</td>
+                    <td>{{ req.start_date.strftime('%d %b %Y') }}</td>
+                    <td>{{ req.end_date.strftime('%d %b %Y') }}</td>
+                    <td>{{ req.total_days }}</td>
+                    <td class="text-truncate" style="max-width:180px;">{{ req.reason or '—' }}</td>
+                    <td><span class="badge-status badge-{{ req.status|lower }}">{{ req.status }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-muted text-center py-4">No leave requests found.</p>
+    {% endif %}
+</div>
+{% endblock %}

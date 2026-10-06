@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Register — Employee Leave Management{% endblock %}
+
+{% block auth_content %}
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="logo">
+            <i class="bi bi-calendar2-check"></i>
+            <h4 class="mt-2 fw-bold">Create Account</h4>
+            <p class="text-muted small">Join Employee Leave Management</p>
+        </div>
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                {{ form.full_name(class="form-control", placeholder="e.g. Ishaan Khan") }}
+                {% for e in form.full_name.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                {{ form.username(class="form-control", placeholder="Choose username") }}
+                {% for e in form.username.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{ form.email(class="form-control", placeholder="your@email.com") }}
+                {% for e in form.email.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                {{ form.password(class="form-control", placeholder="Min 6 characters") }}
+                {% for e in form.password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Confirm Password</label>
+                {{ form.confirm_password(class="form-control") }}
+                {% for e in form.confirm_password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary-custom">Register</button>
+        </form>
+        <p class="text-center mt-3 mb-0 small">
+            Already have an account? <a href="{{ url_for('main.login') }}" style="color:var(--primary);">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
